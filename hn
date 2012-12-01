@@ -1,0 +1,70 @@
+#!/usr/bin/python
+
+"""
+hn (HackerNews)
+
+this is a command-line interface for accessing the front-page HackerNews links
+"""
+
+# import statements
+import sys
+from bs4 import BeautifulSoup
+import urllib2
+
+# Constants ------------------------------
+MAX_ITEMS = 30
+HN_URL = 'http://news.ycombinator.com'
+
+def main(argv):
+    list_links()
+
+def get_hn_soup(url=HN_URL):
+    """
+    get_hn_soup - this function will use urllib2 and the bs4 modules to access
+    the html of the given URL (which defaults to hackernews) and create a soup
+    object for it which is returned to the invoker.
+    """
+    f = urllib2.urlopen(url)
+    html = f.read()
+    soup = BeautifulSoup(html, "html5lib")
+    f.close()
+    return soup
+
+def get_hn_links(soup):
+    """
+    get_hn_links - this function will parse through the given soup object to
+    find all of the HackerNews user posted links by finding the table call
+    object with a class name of 'title'. The article titles will be mapped to
+    their URLs with a dict structure that will be returned.
+    """
+    items = soup.find_all('td', { 'class' : 'title' })
+    hn_links = []
+    for item in items:
+        if item.find('a'):
+            href_tag = item.find('a')
+            hn_links.append( (href_tag.text, href_tag.get('href')) )
+    return hn_links
+
+def list_links(num=MAX_ITEMS):
+    """
+    list_links - this function will access the news items at
+    new.ycombinator.com and print them to stdout. Furthermore, all the links
+    and their associated meta-data will be stored in a hidden file for quick
+    access by other commands of this script.
+    """
+    hn_soup = get_hn_soup()
+    hn_links = get_hn_links(hn_soup)
+
+    for i in range(num):
+        j = i+1
+        print str(j) + " " + hn_links[i][0] + " - " + hn_links[i][1]
+
+def access_link(num=MAX_ITEMS):
+    """
+    access_link - this function will 
+    """
+    print 'hello'
+
+if __name__ == '__main__':
+    main(sys.argv[:1])
+
