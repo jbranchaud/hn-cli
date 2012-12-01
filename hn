@@ -8,15 +8,100 @@ this is a command-line interface for accessing the front-page HackerNews links
 
 # import statements
 import sys
+import os
 from bs4 import BeautifulSoup
 import urllib2
+import subprocess
+from os.path import expanduser
+import json
 
 # Constants ------------------------------
 MAX_ITEMS = 30
 HN_URL = 'http://news.ycombinator.com'
+HN_FILE = '.hn'
+HN_PATH = expanduser('~') + '/' + HN_FILE
+
+COLORS = (
+    'BLACK', 'RED', 'GREEN', 'YELLOW',
+    'BLUE', 'MAGENTA', 'CYAN', 'WHITE'
+)
+
+def color_text(text, color_name, bold=False):
+    if color_name in COLORS:
+        return '\033[{0};{1}m{2}\033[0m'.format(
+            int(bold), COLORS.index(color_name) + 30, text)
+    sys.stderr.write('ERROR: "{0}" is not a valid color.\n'.format(color_name))
+    sys.stderr.write('VALID COLORS: {0}.\n'.format(', '.join(COLORS)))
 
 def main(argv):
-    list_links()
+    argv = get_args(argv)
+    # process the commandline arguments
+    # if there are no arguments, then list the current links
+    if not argv[0]:
+        update_links()
+        sys.exit(1)
+
+    # are we going to view a particular link
+    if argv[0] == 'open' or argv[0] == 'view':
+        if argv[1] and argv[1].isdigit():
+            view_link(int(argv[1]))
+        else:
+            view_link()
+
+    # are we going to update the links
+    elif argv[0] == 'update':
+        update_links()
+
+    # are we going to list the links
+    elif argv[0] == 'list':
+        list_links()
+
+    # the user needs some help
+    elif argv[0] == 'help' or argv[0] == 'h' or argv[0] == '?':
+        print_usage()
+
+    # no valid args given, so tell user what is accepted
+    else:
+        print_simple_usage()
+
+def print_simple_usage():
+    """
+    print_simple_usage - this function will print a simple and concise usage
+    message to the command-line for when no valid arguments are given for this
+    program.
+    """
+    print 'usage: hn [open | view | update | list | help]'
+
+def print_usage():
+    """
+    print_usage - this function will print a usage message to the command-line
+    to tell people how to use this utility.
+    """
+    print 'hn - a command-line utility for HackerNews'
+    print_simple_usage()
+    print 'running hn with no arguments simply grabs the latest HackerNews links and displays them to the console.'
+    print 'the options are as follows:'
+    print ''
+    print 'open\topens the link corresponding to the given number (e.g. hn open 2 -- opens link 2)'
+    print 'view\tworks the same as open'
+    print 'update\tgrabs the most recent set of HackerNews links and displays them to the console (same as just hn).'
+    print 'list\tsee the list of links most recently pulled from HackerNews up to a given number (e.g. hn list 5 -- prints the first 5 links)'
+    print 'help\tprints this helpful explanation of the options for hn.'
+
+def get_args(argv):
+    """
+    get_args - to make it easier to process the command-line arguments, this
+    function will bundle them up into a list of size 2. If there are less than
+    2 arguments given, then Nones will be substituted. If there are more than 2
+    arguments, then each after the first 2 will be ignored. The resulting list
+    is returned.
+    """
+    if not argv:
+        return [None, None]
+    elif len(argv) == 1:
+        return [argv[0], None]
+    else:
+        return argv[:2]
 
 def get_hn_soup(url=HN_URL):
     """
@@ -45,6 +130,28 @@ def get_hn_links(soup):
             hn_links.append( (href_tag.text, href_tag.get('href')) )
     return hn_links
 
+def update_links():
+    """
+    update_links - this function for now will act similarly to the list_links
+    function, but since it is called on a different input command, we will have
+    a separate method for it so that the behavior can vary in the future
+    without impacting the other functionality.
+    """
+    hn_soup = get_hn_soup()
+    hn_links = get_hn_links(hn_soup)
+    store_links(hn_links)
+    for i in range(len(hn_links)):
+        j = i+1
+        print_link(j, hn_links[i][0], hn_links[i][1])
+
+def print_link(num, name, url):
+    """
+    print_link - given the number of a link, the name (title) of a link, and
+    the url for that link, this function will print it to the command-line in
+    standardized way.
+    """
+    print str(num) + " " + name + " (" + url + ")"
+
 def list_links(num=MAX_ITEMS):
     """
     list_links - this function will access the news items at
@@ -52,19 +159,63 @@ def list_links(num=MAX_ITEMS):
     and their associated meta-data will be stored in a hidden file for quick
     access by other commands of this script.
     """
-    hn_soup = get_hn_soup()
-    hn_links = get_hn_links(hn_soup)
+    hn_links = load_links()
 
     for i in range(num):
         j = i+1
-        print str(j) + " " + hn_links[i][0] + " - " + hn_links[i][1]
+        print_link(j, hn_links[i][0], hn_links[i][1])
 
-def access_link(num=MAX_ITEMS):
+def store_links(hn_links):
     """
-    access_link - this function will 
+    store_links - this function will take a list of tuples containing
+    HackerNews link names and urls, it will then write each of these line by
+    line to a CSV file in the .hn directory.
     """
-    print 'hello'
+    home = expanduser("~")
+    f = open(HN_PATH, 'w')
+    f.write(json.dumps(hn_links))
+    f.close()
+
+def load_links():
+    """
+    load_links - this function will access the .hn file (if it exists), loading
+    the list of links from it and then returning that list.
+    """
+    # if .hn doesn't exist, return empty list
+    if not os.path.isfile(HN_PATH):
+        return []
+    # otherwise, load it up
+    hn_links = json.load(open(HN_PATH, 'r'))
+    return hn_links
+
+def view_link(link_num=1):
+    """
+    view_link - this function will use the open command to open the link
+    corresponding to the specified number (link_num). If no number is given,
+    then the first link will be used. If a number exceeding the contents of
+    the hn links file is given, then an error message will be given.
+    Also, assume the link_num is based at 1 (rather than 0).
+    """
+    # if the .hn file doesn't exist, then update_links first
+    if not os.path.isfile(HN_PATH):
+        update_links()
+    
+    links = load_links()
+
+    # check that the given num doesn't exceed the length of the list
+    if link_num >= len(links):
+        print 'there is no HackerNews link associated with ' + str(link_num)
+        sys.exit(1)
+
+    # access the link at link_num
+    num = link_num - 1
+
+    print 'hn - opening ' + links[num][0] + " at " + links[num][1]
+    hn_url = links[num][1]
+
+    # open the link
+    subprocess.call(['open', hn_url])
 
 if __name__ == '__main__':
-    main(sys.argv[:1])
+    main(sys.argv[1:])
 
