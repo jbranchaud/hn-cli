@@ -6,6 +6,8 @@ hn-cli is a command-line interface for HackerNews
 Installation
 ------------
 For now, simply put `hn` in a directory that is on your system's path.
+For instance, you can just throw it in `/usr/local/bin` which is probably on
+your path. If you're not sure, type `echo $PATH`.
 
 Usage
 -----
@@ -20,12 +22,12 @@ Usage
 
 `hn help` - displays the usage info, but if you are reading this, then I guess you don't really need it.
 
-FixMes
+FIXMEs
 ------
 
 - A 31st link is being displayed for going to page 2 of HackerNews, need to ignore this.
 
-ToDos
+TODOs
 -----
 
 - Fancy up the formatting a little
