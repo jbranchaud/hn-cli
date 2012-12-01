@@ -20,6 +20,18 @@ Usage
 
 `hn help` - displays the usage info, but if you are reading this, then I guess you don't really need it.
 
+FixMes
+------
+
+- A 31st link is being displayed for going to page 2 of HackerNews, need to ignore this.
+- The links that stay on HackerNews are only partial links, so they won't work, need to build and cache the whole link.
+
+ToDos
+-----
+
+- Fancy up the formatting a little
+- Think about shortening the links (e.g. http://github.com/jbranchaud/hn-cli --> github.com)
+
 Related
 -------
 
