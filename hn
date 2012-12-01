@@ -54,7 +54,10 @@ def main(argv):
 
     # are we going to list the links
     elif argv[0] == 'list':
-        list_links()
+        if argv[1] and argv[1].isdigit():
+            list_links(int(argv[1]))
+        else:
+            list_links()
 
     # the user needs some help
     elif argv[0] == 'help' or argv[0] == 'h' or argv[0] == '?':
