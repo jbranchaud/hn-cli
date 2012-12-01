@@ -24,7 +24,6 @@ FixMes
 ------
 
 - A 31st link is being displayed for going to page 2 of HackerNews, need to ignore this.
-- The links that stay on HackerNews are only partial links, so they won't work, need to build and cache the whole link.
 
 ToDos
 -----

@@ -131,6 +131,19 @@ def get_hn_links(soup):
         if item.find('a'):
             href_tag = item.find('a')
             hn_links.append( (href_tag.text, href_tag.get('href')) )
+    return clean_links(hn_links)
+
+def clean_links(hn_links):
+    """
+    clean_links - this function will go through the given list of hackernews
+    items and those that are links to local hackernews items (rather than to
+    other websites) will have the HN_URL appended to them so that it is a 
+    fully functioning link. The list of cleaned links will be returned.
+    """
+    for i in range(len(hn_links)):
+        if hn_links[i][1].startswith('item?'):
+            clean_url = HN_URL + '/' + hn_links[i][1]
+            hn_links[i] = (hn_links[i][0], clean_url)
     return hn_links
 
 def update_links():
