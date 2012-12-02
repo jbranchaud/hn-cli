@@ -22,6 +22,12 @@ Usage
 
 `hn help` - displays the usage info, but if you are reading this, then I guess you don't really need it.
 
+Requirements
+------------
+The following is a list of non-standard python libraries needed to run this script:
+
+- [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
+
 FIXMEs
 ------
 
