@@ -168,13 +168,25 @@ def print_link(num, name, url):
     standardized way.
     """
     url = strip_url(url)
-    print str(num) + " " + name + " (" + url + ")"
+    num_str = number_format(num)
+    print num_str + " " + name + " (" + url + ")"
 
 def strip_url(url):
     if url.startswith('http://') or url.startswith('https://'):
         url = url.split('//')[1]
     url_parts = url.split('/')
     return url_parts[0]
+
+def number_format(num):
+    """
+    number-format - this will take a number and format it with brackets and
+    spaces to make sure there is a consistent format with how it is printed.
+    """
+    num_str = '[ ' + str(num) + ' ]'
+    if len(num_str) == 5:
+        return num_str + '  '
+    else:
+        return num_str + ' '
 
 def list_links(num=MAX_ITEMS):
     """
