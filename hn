@@ -167,7 +167,14 @@ def print_link(num, name, url):
     the url for that link, this function will print it to the command-line in
     standardized way.
     """
+    url = strip_url(url)
     print str(num) + " " + name + " (" + url + ")"
+
+def strip_url(url):
+    if url.startswith('http://') or url.startswith('https://'):
+        url = url.split('//')[1]
+    url_parts = url.split('/')
+    return url_parts[0]
 
 def list_links(num=MAX_ITEMS):
     """
