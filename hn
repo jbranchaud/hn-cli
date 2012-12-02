@@ -131,7 +131,7 @@ def get_hn_links(soup):
         if item.find('a'):
             href_tag = item.find('a')
             hn_links.append( (href_tag.text, href_tag.get('href')) )
-    return clean_links(hn_links)
+    return clean_links(hn_links)[:MAX_ITEMS]
 
 def clean_links(hn_links):
     """

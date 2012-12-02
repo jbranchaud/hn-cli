@@ -25,13 +25,12 @@ Usage
 FIXMEs
 ------
 
-- A 31st link is being displayed for going to page 2 of HackerNews, need to ignore this.
+- Some unicode characters appear funky in the output, find out what to do about this.
 
 TODOs
 -----
 
 - Fancy up the formatting a little
-- Think about shortening the links (e.g. http://github.com/jbranchaud/hn-cli --> github.com)
 
 Related
 -------
