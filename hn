@@ -156,6 +156,7 @@ def update_links():
     hn_soup = get_hn_soup()
     hn_links = get_hn_links(hn_soup)
     store_links(hn_links)
+    print ''
     for i in range(len(hn_links)):
         j = i+1
         print_link(j, hn_links[i][0], hn_links[i][1])
@@ -176,7 +177,7 @@ def list_links(num=MAX_ITEMS):
     access by other commands of this script.
     """
     hn_links = load_links()
-
+    print ''
     for i in range(num):
         j = i+1
         print_link(j, hn_links[i][0], hn_links[i][1])
