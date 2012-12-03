@@ -1,5 +1,7 @@
-hn-cli
-======
+HackerNews Command-Line Inteface - hn-cli
+=========================================
+
+Because *real* hackers access HackerNews from their terminal.
 
 hn-cli is a command-line interface for [HackerNews](http://news.ycombinator.com).
 It essentially allows you
