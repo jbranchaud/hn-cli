@@ -37,10 +37,13 @@ TODOs
 -----
 
 - Fancy up the formatting a little
+- Try playing with color for the different elements of the HN item
+- Favorite words and favorite URLs list that will highlight HN items based on your preferences
 
 Related
 -------
 
 - [hnews - Hacker News CLI](https://github.com/bencevans/hnews) by [bencevans](https://github.com/bencevans)
+- [hackernews (hn)](https://github.com/jeyb/hackernews) by [jeyb](https://github.com/jeyb)
 - [hackernews](https://bitbucket.org/zalew/hackernews) by [Zalew](https://bitbucket.org/zalew)
 
