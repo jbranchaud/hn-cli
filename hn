@@ -169,6 +169,7 @@ def print_link(num, name, url):
     """
     url = strip_url(url)
     num_str = number_format(num)
+    name = name.strip()
     print num_str + " " + name + " (" + url + ")"
 
 def strip_url(url):
