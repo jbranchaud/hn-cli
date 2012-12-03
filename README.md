@@ -36,7 +36,9 @@ The following is a list of non-standard python libraries needed to run this scri
 FIXMEs
 ------
 
+- Accessing the 30th link doesn't seem to be working correctly.
 - Some unicode characters appear funky in the output, find out what to do about this.
+- Need more graceful failure for various errors (e.g. when server cannot be reached).
 
 TODOs
 -----
