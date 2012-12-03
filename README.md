@@ -1,7 +1,10 @@
 hn-cli
 ======
 
-hn-cli is a command-line interface for HackerNews
+hn-cli is a command-line interface for [HackerNews](http://news.ycombinator.com).
+It essentially allows you
+to view the front page of HackerNews from your favorite terminal and then open
+up the links in your favorite browser.
 
 Installation
 ------------
