@@ -240,7 +240,7 @@ def view_link(link_num=1):
     links = load_links()
 
     # check that the given num doesn't exceed the length of the list
-    if link_num >= len(links):
+    if link_num > len(links):
         print 'there is no HackerNews link associated with ' + str(link_num)
         sys.exit(1)
 

@@ -36,15 +36,18 @@ The following is a list of non-standard python libraries needed to run this scri
 FIXMEs
 ------
 
-- Accessing the 30th link doesn't seem to be working correctly.
 - Some unicode characters appear funky in the output, find out what to do about this.
 - Need more graceful failure for various errors (e.g. when server cannot be reached).
 
 TODOs
 -----
 
+- Add a comments option (either `hn view 1 comments` `hn view -c 1` or `hn comments 1`
+- In preparation for some fancier features, switch from .hn file to .hn directory
+- Add a `history` command that allows you to see the last n items that you accessed
 - Fancy up the formatting a little
-- Try playing with color for the different elements of the HN item
+- Try playing with color for the different elements of the HN item. Try using
+    [Curses](http://docs.python.org/2/howto/curses.html) for this.
 - Favorite words and favorite URLs list that will highlight HN items based on your preferences
 
 Related
