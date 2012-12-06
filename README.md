@@ -42,6 +42,7 @@ FIXMEs
 TODOs
 -----
 
+- Create an animated GIF to embed in this readme that demonstrates how hn works
 - Add a comments option (either `hn view 1 comments` `hn view -c 1` or `hn comments 1`
 - In preparation for some fancier features, switch from .hn file to .hn directory
 - Allow for multiple articles to be opened at once (e.g. `hn open 2 5 14`)
