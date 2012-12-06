@@ -52,6 +52,7 @@ TODOs
     [Curses](http://docs.python.org/2/howto/curses.html) for this.
 - Favorite words and favorite URLs list that will highlight HN items based on your preferences
 - Add a `summ` or `summary` command that gives some idea of what the article is about.
+- Add a `ran`, `-r`, or `random` command that will open a random article
 
 Related
 -------
