@@ -17,9 +17,18 @@ import json
 
 # Constants ------------------------------
 MAX_ITEMS = 30
+# URLS
 HN_URL = 'http://news.ycombinator.com'
+TOP_URL = 'http://news.ycombinator.com'
+NEW_URL = 'http://news.ycombinator.com/newest'
+# Files
 HN_FILE = '.hn'
-HN_PATH = expanduser('~') + '/' + HN_FILE
+TOP_FILE = 'top.csv'
+NEW_FILE = 'new.csv'
+HN_DIR = '.hn'
+HN_PATH = expanduser('~') + '/' + HN_DIR
+TOP_PATH = HN_PATH + '/' + TOP_FILE
+NEW_PATH = HN_PATH + '/' + NEW_FILE
 
 COLORS = (
     'BLACK', 'RED', 'GREEN', 'YELLOW',
@@ -38,7 +47,7 @@ def main(argv):
     # process the commandline arguments
     # if there are no arguments, then list the current links
     if not argv[0]:
-        update_links()
+        update_links(TOP_URL)
         sys.exit(1)
 
     # are we going to view a particular link
@@ -50,7 +59,7 @@ def main(argv):
 
     # are we going to update the links
     elif argv[0] == 'update':
-        update_links()
+        update_links(TOP_URL)
 
     # are we going to list the links
     elif argv[0] == 'list':
@@ -146,14 +155,14 @@ def clean_links(hn_links):
             hn_links[i] = (hn_links[i][0], clean_url)
     return hn_links
 
-def update_links():
+def update_links(url):
     """
     update_links - this function for now will act similarly to the list_links
     function, but since it is called on a different input command, we will have
     a separate method for it so that the behavior can vary in the future
     without impacting the other functionality.
     """
-    hn_soup = get_hn_soup()
+    hn_soup = get_hn_soup(url)
     hn_links = get_hn_links(hn_soup)
     store_links(hn_links)
     print ''
@@ -235,7 +244,7 @@ def view_link(link_num=1):
     """
     # if the .hn file doesn't exist, then update_links first
     if not os.path.isfile(HN_PATH):
-        update_links()
+        update_links(TOP_URL)
     
     links = load_links()
 
