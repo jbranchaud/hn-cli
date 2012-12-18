@@ -44,6 +44,7 @@ TODOs
 
 - Add a comments option (either `hn view 1 comments` `hn view -c 1` or `hn comments 1`
 - In preparation for some fancier features, switch from .hn file to .hn directory
+- Try transitioning to using the BigRSS provided by HackerNews for these sorts of tools
 - Allow for multiple articles to be opened at once (e.g. `hn open 2 5 14`)
 - Add a `history` command that allows you to see the last n items that you accessed
 - Fancy up the formatting a little
