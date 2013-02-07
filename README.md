@@ -1,5 +1,4 @@
-HackerNews Command-Line Inteface - hn-cli
-=========================================
+# HackerNews Command-Line Inteface - hn-cli
 
 Because *real* hackers access HackerNews from their terminal.
 
@@ -8,14 +7,13 @@ It essentially allows you
 to view the front page of HackerNews from your favorite terminal and then open
 up the links in your favorite browser.
 
-Installation
-------------
+## Installation
+
 For now, simply put `hn` in a directory that is on your system's path.
 For instance, you can just throw it in `/usr/local/bin` which is probably on
 your path. If you're not sure, type `echo $PATH`.
 
-Usage
------
+## Usage
 
 `hn` - grabs and displays the 30 items from the [HackerNews](http://news.ycombinator.com) homepage.
 
@@ -27,20 +25,18 @@ Usage
 
 `hn help` - displays the usage info, but if you are reading this, then I guess you don't really need it.
 
-Requirements
-------------
+## Requirements
+
 The following is a list of non-standard python libraries needed to run this script:
 
 - [BeautifulSoup](http://www.crummy.com/software/BeautifulSoup/)
 
-FIXMEs
-------
+## FIXMEs
 
 - Some unicode characters appear funky in the output, find out what to do about this.
 - Need more graceful failure for various errors (e.g. when server cannot be reached).
 
-TODOs
------
+## TODOs
 
 - Add a comments option (either `hn view 1 comments` `hn view -c 1` or `hn comments 1`
 - In preparation for some fancier features, switch from .hn file to .hn directory
@@ -53,8 +49,7 @@ TODOs
 - Favorite words and favorite URLs list that will highlight HN items based on your preferences
 - Add a `summ` or `summary` command that gives some idea of what the article is about.
 
-Related
--------
+## Related
 
 - [hnews - Hacker News CLI](https://github.com/bencevans/hnews) by [bencevans](https://github.com/bencevans)
 - [hackernews (hn)](https://github.com/jeyb/hackernews) by [jeyb](https://github.com/jeyb)
