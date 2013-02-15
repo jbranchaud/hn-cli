@@ -38,6 +38,7 @@ The following is a list of non-standard python libraries needed to run this scri
 
 ## TODOs
 
+- Add a LICENSE file with the MIT file for this project
 - Create an animated GIF to embed in this readme that demonstrates how hn works
 - Add a comments option (either `hn view 1 comments` `hn view -c 1` or `hn comments 1`
 - In preparation for some fancier features, switch from .hn file to .hn directory
