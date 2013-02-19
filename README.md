@@ -59,5 +59,7 @@ The following is a list of non-standard python libraries needed to run this scri
 
 ## License
 
-Copyright (c) 2013 Josh Branchaud under the MIT License. See LICENSE for details.
+Copyright (c) 2013 Josh Branchaud under the MIT License.
+See [LICENSE](https://github.com/jbranchaud/hn-cli/blob/master/LICENSE)
+for details.
 
