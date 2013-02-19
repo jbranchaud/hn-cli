@@ -57,3 +57,7 @@ The following is a list of non-standard python libraries needed to run this scri
 - [hackernews (hn)](https://github.com/jeyb/hackernews) by [jeyb](https://github.com/jeyb)
 - [hackernews](https://bitbucket.org/zalew/hackernews) by [Zalew](https://bitbucket.org/zalew)
 
+## License
+
+Copyright (c) 2013 Josh Branchaud under the MIT License. See LICENSE for details.
+
